@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "type": "paraphrased",
+    "query": "encrypted channel fails to start when attaching files to the repository",
+    "expected_case": "CS20270142",
+    "component": null,
+    "note": "No overlap with 'SAPHTTP', 'SSL', 'sapcrypto', 'upload'"
+  },
+  {
+    "id": 2,
+    "type": "paraphrased",
+    "query": "records are reachable through the system but the link in the portal shows nothing",
+    "expected_case": "CS20270239",
+    "component": null,
+    "note": "No overlap with 'frontend', 'URL generation', 'SICF', 'alias'"
+  },
+  {
+    "id": 3,
+    "type": "paraphrased",
+    "query": "attachment creation fires for most record categories but never runs for one particular type",
+    "expected_case": "CS20270201",
+    "component": null,
+    "note": "No overlap with 'workflow', 'OAWD', 'business object', 'ASSIGNED event'"
+  },
+  {
+    "id": 4,
+    "type": "paraphrased",
+    "query": "running the transfer job a second time causes the same files to appear twice",
+    "expected_case": "CS20270215",
+    "component": null,
+    "note": "No overlap with 'migration', 'duplicate entries', 'DEL_FILE', 're-run'"
+  },
+  {
+    "id": 5,
+    "type": "customer",
+    "query": "archiving works when I run it manually but nothing gets saved when the job runs overnight",
+    "expected_case": "CS20270228",
+    "component": "BC-SRV-ARL",
+    "note": "Rewritten from memory; was verbatim copy of CS20270228 symptoms"
+  },
+  {
+    "id": 6,
+    "type": "customer",
+    "query": "PDFs keep opening inside SAP instead of my PDF reader, I want them to use the native viewer",
+    "expected_case": "CS20270163",
+    "component": "BC-CCM-PRN",
+    "note": "Rewritten from memory; was verbatim copy of CS20270163 symptoms"
+  },
+  {
+    "id": 7,
+    "type": "customer",
+    "query": "when I try to open a saved PDF it downloads as an unknown file type instead of opening",
+    "expected_case": "CS20270184",
+    "component": "CA-DMS",
+    "note": "Rewritten from memory; was verbatim copy of CS20270184 symptoms"
+  },
+  {
+    "id": 8,
+    "type": "vague",
+    "query": "user keeps getting an error and can't run the job",
+    "expected_case": "CS20270192",
+    "component": null,
+    "note": "Deliberately under-specified; no system, transaction, or error code given"
+  },
+  {
+    "id": 9,
+    "type": "vague",
+    "query": "something is wrong with opening documents",
+    "expected_case": "CS20270156",
+    "component": "CA-DMS",
+    "note": "Vague phrasing; component boost needed to surface the right ticket"
+  },
+  {
+    "id": 10,
+    "type": "no_match",
+    "query": "payroll calculation is wrong for part-time employees after hourly rate change",
+    "expected_case": null,
+    "component": null,
+    "note": "HR/payroll — no archiving content; original no-match baseline"
+  },
+  {
+    "id": 11,
+    "type": "customer",
+    "query": "content server keeps rejecting document requests with an authentication error, credentials look correct on our side",
+    "expected_case": "CS20270156",
+    "component": "CA-DMS",
+    "note": "Customer phrasing; no overlap with 'HTTP 401', 'Unauthorized', 'URL generated'"
+  },
+  {
+    "id": 12,
+    "type": "customer",
+    "query": "trying to delete migrated documents from the old repository but the server returns forbidden, says retention period has not expired",
+    "expected_case": "CS20270171",
+    "component": "OT-ECM-ARC",
+    "note": "Customer phrasing for the retention/403 case"
+  },
+  {
+    "id": 13,
+    "type": "customer",
+    "query": "uploads to the document archive fail intermittently, trace shows something about an SSL library not loading",
+    "expected_case": "CS20270142",
+    "component": null,
+    "note": "Second angle on CS20270142; keeps 'SSL' and 'library' but drops SAPHTTP and sapcrypto"
+  },
+  {
+    "id": 14,
+    "type": "customer",
+    "query": "user gets a permissions error running the archiving program, a colleague with the same role can do it fine",
+    "expected_case": "CS20270192",
+    "component": null,
+    "note": "Second angle on CS20270192; no 'S_DATASET', 'SU53', or 'authorization object'"
+  },
+  {
+    "id": 15,
+    "type": "customer",
+    "query": "we are moving all our documents to a new archive and worried that running the job twice will create extra copies",
+    "expected_case": "CS20270215",
+    "component": null,
+    "note": "Second angle on the persistent miss CS20270215; no 'migration', 'duplicate', 'DEL_FILE'"
+  },
+  {
+    "id": 16,
+    "type": "customer",
+    "query": "clicking a document link in the web portal does nothing, but the document opens fine from inside SAP",
+    "expected_case": "CS20270239",
+    "component": null,
+    "note": "Second angle on CS20270239; no 'SICF', 'alias', 'frontend URL generation'"
+  },
+  {
+    "id": 17,
+    "type": "no_match",
+    "query": "user cannot log in after a password reset, account appears locked",
+    "expected_case": null,
+    "component": null,
+    "note": "Identity/auth domain — unrelated to document archiving"
+  },
+  {
+    "id": 18,
+    "type": "no_match",
+    "query": "goods receipt posting fails with an incorrect valuation class, stock account is wrong",
+    "expected_case": null,
+    "component": null,
+    "note": "MM/FI domain — unrelated to document archiving"
+  }
+]
