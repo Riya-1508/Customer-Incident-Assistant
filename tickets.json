@@ -1,0 +1,184 @@
+[
+  {
+    "case_number": "CS20270142",
+    "short_description": "ArchiveLink document upload failing - SAPHTTP SSL error",
+    "component": "BC-SRV-ARL",
+    "priority": "High",
+    "state": "Resolved",
+    "error_category": "SAP Product Issue",
+    "error_subcategory": "Configuration",
+    "assignment_group": "DS Development",
+    "system_type": "PROD",
+    "first_response_due_by": "2027-01-15T14:00:00",
+    "assignment_history": [
+      {"component": "BC-SRV-ARL", "assignment_group": "DS Development", "timestamp": "2027-01-15T09:00:00"}
+    ],
+    "symptoms": "Document uploads via SAPHTTP intermittently failing. SAPHTTP trace shows 'Unable to load sapcrypto.dll, Loading of SSL library failed - NO SSL available'.",
+    "diagnostic_steps": ["Captured SAPHTTPA trace per note 1947876", "Reviewed system trace for SSL library load errors"],
+    "resolution_notes": "SSL library required for secure communication could not initialize on app server. Implemented SAP Note 506314 (SAPHTTP and SSL). Workaround alternative: set SAPHTTP_RFC_CHECK_TO parameter to FAILED to skip SAPHTTP check and route via ICM (KBA 1783987) when note implementation isn't feasible."
+  },
+  {
+    "case_number": "CS20270156",
+    "short_description": "Content server returning 401 Unauthorized on document retrieval",
+    "component": "CA-DMS",
+    "priority": "Medium",
+    "state": "Routed to vendor",
+    "error_category": "SAP Product Issue",
+    "error_subcategory": "Third-party integration",
+    "assignment_group": "DS Development",
+    "system_type": "PROD",
+    "first_response_due_by": "2027-01-20T16:00:00",
+    "assignment_history": [
+      {"component": "BC-SRV-ARL", "assignment_group": "DS Development", "timestamp": "2027-01-20T10:00:00"},
+      {"component": "External-Vendor", "assignment_group": "Content Server Vendor", "timestamp": "2027-01-21T11:00:00"}
+    ],
+    "symptoms": "Document access URL generated correctly by SAP, but content server responds with HTTP 401 Unauthorized.",
+    "diagnostic_steps": ["Verified generated URL and access credentials on SAP side", "Captured response headers from content server"],
+    "resolution_notes": "Confirmed SAP-side URL generation and ArchiveLink config correct. Issue isolated to content server/repository vendor authentication layer — routed for vendor-side investigation."
+  },
+  {
+    "case_number": "CS20270163",
+    "short_description": "PDF documents opening in ECL Viewer instead of native PDF viewer",
+    "component": "BC-CCM-PRN",
+    "priority": "Low",
+    "state": "Resolved",
+    "error_category": "SAP Product Issue",
+    "error_subcategory": "Display/Viewer configuration",
+    "assignment_group": "DS Development",
+    "system_type": "non-PROD",
+    "first_response_due_by": "2027-01-22T12:00:00",
+    "assignment_history": [
+      {"component": "BC-SRV-ARL", "assignment_group": "DS Development", "timestamp": "2027-01-22T09:30:00"}
+    ],
+    "symptoms": "Customer does not want PDF files displayed in ECL Viewer within OAAD; wants native viewer behavior instead.",
+    "diagnostic_steps": ["Checked PDF document class application setting in OAD2", "Identified application type set to EAIWEB.WEBVIEWER2D"],
+    "resolution_notes": "Changed application type for PDF document class from EAIWEB.WEBVIEWER2D to SAPHTML in transaction OAD2 to disable ECL Viewer display. Note: change applies system-wide to all documents using that document class."
+  },
+  {
+    "case_number": "CS20270171",
+    "short_description": "Unable to delete migrated ArchiveLink document - HTTP 403 from content server",
+    "component": "OT-ECM-ARC",
+    "priority": "Medium",
+    "state": "Resolved",
+    "error_category": "SAP Product Issue",
+    "error_subcategory": "Third-party content server policy",
+    "assignment_group": "DS Development",
+    "system_type": "PROD",
+    "first_response_due_by": "2027-01-25T15:00:00",
+    "assignment_history": [
+      {"component": "BC-SRV-ARL", "assignment_group": "DS Development", "timestamp": "2027-01-25T10:00:00"}
+    ],
+    "symptoms": "Deletion request to source repository fails with HTTP 403. Response indicates 'document retention not yet expired'.",
+    "diagnostic_steps": ["Sent deletion request and captured content server response", "Confirmed retention period value in response headers (3650 days)"],
+    "resolution_notes": "Content server enforces a retention policy independent of SAP-side delay-deletion settings. Customer needs to work with repository administrator to adjust/remove retention period before deletion can succeed — not resolvable from SAP/ArchiveLink side."
+  },
+  {
+    "case_number": "CS20270184",
+    "short_description": "Document displaying as binary/octet-stream instead of PDF",
+    "component": "CA-DMS",
+    "priority": "Medium",
+    "state": "Routed to vendor",
+    "error_category": "SAP Product Issue",
+    "error_subcategory": "Third-party content server behavior",
+    "assignment_group": "DS Development",
+    "system_type": "PROD",
+    "first_response_due_by": "2027-01-28T13:00:00",
+    "assignment_history": [
+      {"component": "BC-SRV-ARL", "assignment_group": "DS Development", "timestamp": "2027-01-28T09:00:00"},
+      {"component": "External-Vendor", "assignment_group": "Content Server Vendor", "timestamp": "2027-01-28T14:00:00"}
+    ],
+    "symptoms": "PDF document class not rendering correctly; content server reports MIME type as application/octet-stream instead of application/pdf.",
+    "diagnostic_steps": ["Verified correct MIME type (application/pdf) sent in request headers from SAP side", "Confirmed content server storing incorrect MIME type on its end"],
+    "resolution_notes": "SAP-side request headers confirmed correct. Issue isolated to third-party content repository incorrectly storing/returning MIME type — routed to content server vendor for correction."
+  },
+  {
+    "case_number": "CS20270192",
+    "short_description": "User unable to execute archiving program - authorization error",
+    "component": "BC-SRV-ARL",
+    "priority": "Low",
+    "state": "Resolved",
+    "error_category": "SAP Product Issue",
+    "error_subcategory": "Authorization",
+    "assignment_group": "DS Development",
+    "system_type": "PROD",
+    "first_response_due_by": "2027-02-01T11:00:00",
+    "assignment_history": [
+      {"component": "BC-SRV-ARL", "assignment_group": "DS Development", "timestamp": "2027-02-01T08:30:00"}
+    ],
+    "symptoms": "User reports error when attempting to execute archiving-related report. No further detail initially provided.",
+    "diagnostic_steps": ["Requested SU53 output from user to check failed authorization checks", "Identified missing authorization for object S_DATASET"],
+    "resolution_notes": "User's role was missing authorization object S_DATASET required for file-level operations during archiving. Resolved after Basis team assigned the necessary authorization."
+  },
+  {
+    "case_number": "CS20270201",
+    "short_description": "ArchiveLink entry not created via workflow for specific business object",
+    "component": "BC-SRV-ARL",
+    "priority": "High",
+    "state": "In Progress",
+    "error_category": "SAP Product Issue",
+    "error_subcategory": "Workflow/Configuration",
+    "assignment_group": "DS Development",
+    "system_type": "PROD",
+    "first_response_due_by": "2027-02-03T10:00:00",
+    "assignment_history": [
+      {"component": "BC-SRV-ARL", "assignment_group": "DS Development", "timestamp": "2027-02-03T09:00:00"}
+    ],
+    "symptoms": "OAWD document creation via workflow works for most business objects but fails for one specific object type. Customer has a go-live planned, high urgency.",
+    "diagnostic_steps": ["Verified ArchiveLink config was correctly maintained for the affected object type", "Checked OAG1 'Create Event Object Type.<ASSIGNED>' setting", "Checked SWO1 for existence of the ASSIGNED event on the affected object type"],
+    "resolution_notes": "Found that the prerequisite event (ASSIGNED) required by OAG1 config did not exist for the specific object type in SWO1 — unlike other working object types. Recommended adding the missing event definition."
+  },
+  {
+    "case_number": "CS20270215",
+    "short_description": "Risk of duplicate documents when re-running migration report",
+    "component": "BC-SRV-ARL",
+    "priority": "Medium",
+    "state": "Resolved",
+    "error_category": "SAP Product Issue",
+    "error_subcategory": "Migration/Consulting",
+    "assignment_group": "DS Development",
+    "system_type": "non-PROD",
+    "first_response_due_by": "2027-02-05T14:00:00",
+    "assignment_history": [
+      {"component": "BC-SRV-ARL", "assignment_group": "DS Development", "timestamp": "2027-02-05T09:00:00"}
+    ],
+    "symptoms": "Customer migrating large volume of documents between content repositories, concerned about duplicate entries if the migration report is re-run.",
+    "diagnostic_steps": ["Explained DEL_FILE checkbox behavior in the migration report", "Clarified connection-table entry lifecycle on re-run"],
+    "resolution_notes": "With DEL_FILE='X' (default), successfully migrated documents' source connection entries are deleted, making re-runs safe. With DEL_FILE unchecked, re-runs will create duplicate documents with new document IDs — must be avoided. Advised customer to keep default setting."
+  },
+  {
+    "case_number": "CS20270228",
+    "short_description": "ArchiveLink entries not created when output job runs in background",
+    "component": "BC-SRV-ARL",
+    "priority": "High",
+    "state": "Resolved",
+    "error_category": "SAP Product Issue",
+    "error_subcategory": "Custom code / tRFC handling",
+    "assignment_group": "DS Development",
+    "system_type": "PROD",
+    "first_response_due_by": "2027-02-08T12:00:00",
+    "assignment_history": [
+      {"component": "BC-SRV-ARL", "assignment_group": "DS Development", "timestamp": "2027-02-08T09:00:00"}
+    ],
+    "symptoms": "Archiving works correctly when output job runs in dialog/online mode but silently fails (no error, nothing in SM58) when run as a background job.",
+    "diagnostic_steps": ["Reviewed archiving function module's use of transactional RFC (tRFC) to destination SAP_AL_OUT", "Debugged conditional COMMIT WORK logic tied to a RESERVE flag", "Manually toggled commit flag at runtime to confirm behavior"],
+    "resolution_notes": "tRFC call is only executed after COMMIT WORK, which the archiving function leaves to the calling program. Calling program's background job path wasn't issuing COMMIT WORK, so the tRFC was silently discarded. Fix: add explicit COMMIT WORK immediately after the output job completes."
+  },
+  {
+    "case_number": "CS20270239",
+    "short_description": "Content server service alias not maintained - documents inaccessible",
+    "component": "BC-SRV-ARL",
+    "priority": "Medium",
+    "state": "Resolved",
+    "error_category": "SAP Product Issue",
+    "error_subcategory": "Configuration",
+    "assignment_group": "DS Development",
+    "system_type": "PROD",
+    "first_response_due_by": "2027-02-10T13:00:00",
+    "assignment_history": [
+      {"component": "BC-SRV-ARL", "assignment_group": "DS Development", "timestamp": "2027-02-10T10:00:00"}
+    ],
+    "symptoms": "Frontend document display URL generation failing; documents accessible via backend but not frontend.",
+    "diagnostic_steps": ["Checked SICF for content server service configuration", "Found sap/bc/contentserver service not maintained under external aliases"],
+    "resolution_notes": "The sap/bc/contentserver service needed to be maintained under SICF external aliases for frontend display URLs to resolve correctly. Customer referred to SAP Note 2827260 and applied the fix."
+  }
+]
