@@ -85,6 +85,8 @@ On the 18-query set, the component boost lifted one vague query ("something is w
 
 Threshold 0.263 = midpoint between no-match ceiling (0.247) and hit floor (0.279).
 
+**Weak-result filter (18 queries, symptoms-only index, boost=0.05):** at threshold 0.263, all 3 no-match queries are correctly suppressed (top scores 0.13–0.25) and all 15 scoreable queries correctly pass (min 0.28); the 3 wrong-ticket returns score 0.32–0.62 and are not caught by the filter.
+
 ## Known limits
 
 - **Threshold tuned on its own eval set.** 0.263 was derived from 15 queries drawn from the same 10-ticket corpus used for indexing. It will need re-calibration on a larger, held-out set.
